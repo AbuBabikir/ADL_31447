@@ -1,0 +1,16 @@
+#!/bin/bash
+
+regex="(.*)/(.*)"
+
+echo "file,label" > data.csv
+index=0
+for f in $(find */*)
+do
+   echo $f
+   if [[ "$f" =~ $regex ]]; then
+      echo "${BASH_REMATCH[0]},${BASH_REMATCH[1]}" >> data.csv
+   else
+      echo not found
+   fi
+   index=$(expr $index + 1)
+done
